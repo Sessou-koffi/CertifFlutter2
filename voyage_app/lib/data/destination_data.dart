@@ -1,0 +1,61 @@
+import '../models/destination.dart';
+
+class DestinationData {
+  static final List<Destination> sampleDestinations = [
+    Destination(
+      id: '1',
+      title: 'Santorin',
+      country: 'Grèce',
+      description: 'Découvrez les célèbres villages aux maisons blanches et dômes bleus perchés au-dessus de la mer Égée. Profitez de couchers de soleil inoubliables.',
+      imageUrl: 'assets/images/santorin1.jpg',
+      pricePerNight: 120.0,
+      rating: 4.8,
+      activities: ['Visite de villages', 'Croisière en catamaran', 'Dégustation de vins'],
+      isPopular: true,
+    ),
+    Destination(
+      id: '2',
+      title: 'Kyoto',
+      country: 'Japon',
+      description: 'Explorez le Japon traditionnel à travers ses milliers de temples bouddhistes, ses sanctuaires shinto, ses jardins somptueux et ses maisons en bois.',
+      imageUrl: 'assets/images/kyoto1.jpg',
+      pricePerNight: 95.0,
+      rating: 4.9,
+      activities: ['Visite de temples', 'Cérémonie du thé', 'Balade à Gion'],
+      isPopular: true,
+    ),
+    Destination(
+      id: '3',
+      title: 'Reykjavik',
+      country: 'Islande',
+      description: 'Une immersion totale au cœur d\'une nature brute. Admirez les aurores boréales, détendez-vous dans les sources chaudes et explorez des cascades géantes.',
+      imageUrl: 'assets/images/Reykjavik1.jpg',
+      pricePerNight: 150.0,
+      rating: 4.7,
+      activities: ['Aurores boréales', 'Randonnée sur glacier', 'Blue Lagoon'],
+      isPopular: false,
+    ),
+    Destination(
+      id: '4',
+      title: 'Marrakech',
+      country: 'Maroc',
+      description: 'Laissez-vous envoûter par l\'effervescence de la médina, les parfums des souks, les palais historiques et les jardins majestueux comme le Jardin Majorelle.',
+      imageUrl: 'assets/images/Marrakech1.jpg',
+      pricePerNight: 65.0,
+      rating: 4.6,
+      activities: ['Visite des souks', 'Nuit dans le désert', 'Palais Bahia'],
+      isPopular: true,
+    ),
+    Destination(
+      id: '5',
+      title: 'Banff',
+      country: 'Canada',
+      description: 'Le paradis des amoureux de grands espaces. Situé au cœur des Rocheuses canadiennes, découvrez des lacs turquoise entourés de montagnes enneigées.',
+      imageUrl: 'assets/images/Banff1.jpg',
+      pricePerNight: 140.0,
+      rating: 4.9,
+      activities: ['Canoë sur le lac Louise', 'Randonnée', 'Observation de la faune'],
+      isPopular: false,
+    ),
+  ];
+}
