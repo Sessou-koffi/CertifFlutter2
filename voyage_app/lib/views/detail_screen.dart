@@ -12,9 +12,12 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Récupération de la destination correspondante à l'ID reçu en paramètre
+    // Récupération sécurisée de la destination avec gestion d'erreur orElse
     final destination = DestinationData.sampleDestinations.firstWhere(
       (dest) => dest.id == destinationId,
+      orElse: () => DestinationData.sampleDestinations.first,
     );
+
 
     return Scaffold(
       body: SingleChildScrollView(

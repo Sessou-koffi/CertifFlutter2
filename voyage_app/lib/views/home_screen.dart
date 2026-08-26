@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../data/destination_data.dart';
 import '../routes/app_router.dart';
 import '../widgets/theme_toggle_button.dart';
+import '../widgets/destination_card.dart'; // Import crucial du widget réutilisable
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,59 +35,18 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 
-                // Section Populaire avec Stack et Card
+                // Section Populaire utilisant explicitement le widget réutilisable DestinationCard
                 SizedBox(
-                  height: 220,
+                  height: 270, // Légèrement ajusté pour correspondre à la hauteur standard de la carte
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: popularDestinations.length,
                     itemBuilder: (context, index) {
                       final item = popularDestinations[index];
-                      return GestureDetector(
-                        // REMPLACEZ LA LIGNE DU ONTAP PAR CELLE-CI :
-                        onTap: () => context.push('${AppRouter.detail}/${item.id}'),
-                        child: Container(
-                          width: isTablet ? 300 : 200,
-                          margin: const EdgeInsets.only(right: 16),
-                          child: Card(
-                            clipBehavior: Clip.antiAlias,
-                            elevation: 4,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Image.asset(item.imageUrl, fit: BoxFit.cover),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [Colors.transparent, Colors.black87],
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 12,
-                                  left: 12,
-                                  right: 12,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        item.title,
-                                        style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        item.country,
-                                        style: const TextStyle(color: Colors.white70, fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      return Container(
+                        width: isTablet ? 320 : 250,
+                        margin: const EdgeInsets.only(right: 16),
+                        child: DestinationCard(destination: item),
                       );
                     },
                   ),
