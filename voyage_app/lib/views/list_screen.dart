@@ -13,12 +13,11 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
   List<Destination> _filteredDestinations = [];
   String _searchQuery = '';
-  bool _filterByBudget = false; // Filtrer les destinations < 100€ / nuit
+  bool _filterByBudget = false;
 
   @override
   void initState() {
     super.initState();
-    // On initialise la liste avec toutes les données disponibles
     _filteredDestinations = DestinationData.sampleDestinations;
   }
 
@@ -36,21 +35,16 @@ class _ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Toutes les Destinations'),
-      ),
+      appBar: AppBar(title: const Text('Toutes les Destinations')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Barre de recherche textuelle
             TextField(
               decoration: InputDecoration(
                 hintText: 'Rechercher une ville ou un pays...',
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
               onChanged: (value) {
                 _searchQuery = value;
@@ -58,8 +52,6 @@ class _ListScreenState extends State<ListScreen> {
               },
             ),
             const SizedBox(height: 12),
-            
-            // Ligne de boutons de filtrage (Filtre par budget)
             Row(
               children: [
                 FilterChip(
@@ -75,19 +67,13 @@ class _ListScreenState extends State<ListScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            
-            // Liste dynamique des résultats
             Expanded(
               child: _filteredDestinations.isEmpty
-                  ? const Center(
-                      child: Text('Aucune destination ne correspond à vos critères.'),
-                    )
+                  ? const Center(child: Text('Aucune destination trouvée.'))
                   : ListView.builder(
                       itemCount: _filteredDestinations.length,
                       itemBuilder: (context, index) {
-                        return DestinationCard(
-                          destination: _filteredDestinations[index],
-                        );
+                        return DestinationCard(destination: _filteredDestinations[index]);
                       },
                     ),
             ),

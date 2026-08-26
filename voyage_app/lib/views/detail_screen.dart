@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/destination_data.dart';
+import '../models/destination.dart';
 
 class DetailScreen extends StatelessWidget {
   final String destinationId;
@@ -11,20 +12,34 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Récupération de la destination correspondante à l'ID reçu en paramètre
-    // Récupération sécurisée de la destination avec gestion d'erreur orElse
-    final destination = DestinationData.sampleDestinations.firstWhere(
-      (dest) => dest.id == destinationId,
-      orElse: () => DestinationData.sampleDestinations.first,
-    );
+    // Recherche sécurisée de la destination
+    Destination? destination;
+    try {
+      destination = DestinationData.sampleDestinations.firstWhere(
+        (dest) => dest.id == destinationId,
+      );
+    } catch (_) {
+      destination = null;
+    }
 
+    // Si l'ID n'existe pas, on affiche un écran d'erreur propre
+    if (destination == null) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Erreur')),
+        body: const Center(
+          child: Text(
+            'Destination introuvable.',
+            style: TextStyle(fontSize: 18, color: Colors.red),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image principale avec bouton de retour intégré grâce à un Stack
             Stack(
               children: [
                 Hero(
@@ -49,14 +64,11 @@ class DetailScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-            // Contenu informatif
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // En-tête : Titre et Note
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -65,10 +77,7 @@ class DetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             destination.title,
-                            style: const TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
                           Row(
@@ -95,20 +104,14 @@ class DetailScreen extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               destination.rating.toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  
                   const Divider(height: 32),
-                  
-                  // Description
                   const Text(
                     'À propos',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -118,10 +121,7 @@ class DetailScreen extends StatelessWidget {
                     destination.description,
                     style: const TextStyle(fontSize: 16, height: 1.5, color: Colors.grey),
                   ),
-                  
                   const Divider(height: 32),
-                  
-                  // Activités recommandées (Création dynamique de puces)
                   const Text(
                     'Activités au programme',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -138,10 +138,7 @@ class DetailScreen extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  
                   const SizedBox(height: 32),
-                  
-                  // Prix et bouton de réservation fictif
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
