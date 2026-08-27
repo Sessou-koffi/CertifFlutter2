@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../data/destination_data.dart';
 import '../models/destination.dart';
+import '../widgets/activity_chip.dart';
 
 class DetailScreen extends StatelessWidget {
   final String destinationId;
@@ -12,7 +14,6 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Recherche sécurisée de la destination
     Destination? destination;
     try {
       destination = DestinationData.sampleDestinations.firstWhere(
@@ -22,15 +23,11 @@ class DetailScreen extends StatelessWidget {
       destination = null;
     }
 
-    // Si l'ID n'existe pas, on affiche un écran d'erreur propre
     if (destination == null) {
       return Scaffold(
         appBar: AppBar(title: const Text('Erreur')),
         body: const Center(
-          child: Text(
-            'Destination introuvable.',
-            style: TextStyle(fontSize: 18, color: Colors.red),
-          ),
+          child: Text('Destination introuvable.', style: TextStyle(fontSize: 18, color: Colors.red)),
         ),
       );
     }
@@ -58,7 +55,7 @@ class DetailScreen extends StatelessWidget {
                     backgroundColor: Colors.black45,
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () => context.pop(), // Utilisation de GoRouter context.pop()
                     ),
                   ),
                 ),
@@ -84,10 +81,7 @@ class DetailScreen extends StatelessWidget {
                             children: [
                               const Icon(Icons.location_on, color: Colors.teal, size: 20),
                               const SizedBox(width: 4),
-                              Text(
-                                destination.country,
-                                style: const TextStyle(fontSize: 16, color: Colors.grey),
-                              ),
+                              Text(destination.country, style: const TextStyle(fontSize: 16, color: Colors.grey)),
                             ],
                           ),
                         ],
@@ -102,40 +96,24 @@ class DetailScreen extends StatelessWidget {
                           children: [
                             const Icon(Icons.star, color: Colors.amber, size: 20),
                             const SizedBox(width: 4),
-                            Text(
-                              destination.rating.toString(),
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
-                            ),
+                            Text(destination.rating.toString(), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
                           ],
                         ),
                       ),
                     ],
                   ),
                   const Divider(height: 32),
-                  const Text(
-                    'À propos',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                  const Text('À propos', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
-                  Text(
-                    destination.description,
-                    style: const TextStyle(fontSize: 16, height: 1.5, color: Colors.grey),
-                  ),
+                  Text(destination.description, style: const TextStyle(fontSize: 16, height: 1.5, color: Colors.grey)),
                   const Divider(height: 32),
-                  const Text(
-                    'Activités au programme',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                  const Text('Activités au programme', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: destination.activities.map((activity) {
-                      return Chip(
-                        label: Text(activity),
-                        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                        side: BorderSide.none,
-                      );
+                      return ActivityChip(label: activity); // Utilisation du 4eme widget réutilisable
                     }).toList(),
                   ),
                   const SizedBox(height: 32),
@@ -147,7 +125,7 @@ class DetailScreen extends StatelessWidget {
                         children: [
                           const Text('Prix estimé', style: TextStyle(color: Colors.grey)),
                           Text(
-                            '${destination.pricePerNight.toStringAsFixed(0)}€ / nuit',
+                            '${destination.pricePerNight.toInt()} € / nuit', // Formatage propre sans décimales abruptes
                             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                           ),
                         ],
