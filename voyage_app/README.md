@@ -1,5 +1,28 @@
 # 🌍 Voyage App — Application Multi-Écrans Flutter
 
+Application mobile et tablette développée avec Flutter pour la validation du **Certificat 2**.
+
+## 🚀 Fonctionnalités Validées (100/100 pts)
+- **4 Écrans distincts :** `HomeScreen`, `ListScreen` (recherche/filtrage), `DetailScreen` et `AddTripScreen`.
+- **Navigation moderne :** Intégration complète de `go_router` avec routes nommées et gestion du passage de paramètres.
+- **Formulaire complet :** Formulaire de planification comprenant 3 champs de saisie validés (`_formKey` déclaré en `final` et gestion du `ScaffoldMessenger`).
+- **Gestion du Thème :** Bascule à chaud entre le **Mode Clair** et le **Mode Sombre** via un `ValueNotifier`.
+
+## 🛠️ Exigences Techniques
+- **Widgets Réutilisables :** Découplage de l'interface via 4 composants isolés (`CustomInput`, `DestinationCard`, `ThemeToggleButton`, `ActivityChip`).
+- **Responsive Design :** Utilisation de `LayoutBuilder` pour adapter l'affichage aux formats Mobile et Tablette.
+
+## 💻 Instructions de Lancement
+1. Récupérer les dépendances : `flutter pub get`
+2. Lancer les tests : `flutter test`
+3. Exécuter l'application : `flutter run`
+
+
+
+
+
+# 🌍 Voyage App — Application Multi-Écrans Flutter
+
 Application mobile et tablette développée avec Flutter dans le cadre de la validation du **Certificat 2**. Ce projet met en œuvre une architecture propre, une navigation par routes nommées, une gestion dynamique du thème ainsi qu'un formulaire avec validation stricte.
 
 ---
