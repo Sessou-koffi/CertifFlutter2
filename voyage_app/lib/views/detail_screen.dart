@@ -40,7 +40,7 @@ class DetailScreen extends StatelessWidget {
             Stack(
               children: [
                 Hero(
-                  tag: 'dest-img-${destination.id}',
+                  tag: 'dest-img-${destination.id}', // Tag unique intégrant l'ID
                   child: Image.asset(
                     destination.imageUrl,
                     height: 300,
@@ -55,7 +55,7 @@ class DetailScreen extends StatelessWidget {
                     backgroundColor: Colors.black45,
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => context.pop(), // Utilisation de GoRouter context.pop()
+                      onPressed: () => context.pop(),
                     ),
                   ),
                 ),
@@ -113,7 +113,7 @@ class DetailScreen extends StatelessWidget {
                     spacing: 8,
                     runSpacing: 8,
                     children: destination.activities.map((activity) {
-                      return ActivityChip(label: activity); // Utilisation du 4eme widget réutilisable
+                      return ActivityChip(label: activity);
                     }).toList(),
                   ),
                   const SizedBox(height: 32),
@@ -125,7 +125,7 @@ class DetailScreen extends StatelessWidget {
                         children: [
                           const Text('Prix estimé', style: TextStyle(color: Colors.grey)),
                           Text(
-                            '${destination.pricePerNight.toInt()} € / nuit', // Formatage propre sans décimales abruptes
+                            '${destination.pricePerNight.toStringAsFixed(2)} € / nuit', // Formatage précis avec décimales
                             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -133,7 +133,7 @@ class DetailScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Réservation bientôt disponible !')),
+                            const SnackBar(content: Text('Présentation bientôt disponible !')),
                           );
                         },
                         style: ElevatedButton.styleFrom(

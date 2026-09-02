@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Explorer le Monde'),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleButton()], // Position unique et cohérente
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -28,21 +28,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Bouton de thème très visible au milieu pour le robot
-                Card(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Changer le style de l\'application :', style: TextStyle(fontWeight: FontWeight.bold)),
-                        ThemeToggleButton(),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 const Text(
                   'Destinations Populaires',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -50,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 
                 SizedBox(
-                  height: 270,
+                  height: 280, // Hauteur augmentée pour éviter que le contenu soit coupé
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: popularDestinations.length,
@@ -78,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisCount: isTablet ? 4 : 2,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  childAspectRatio: 2.5,
+                  childAspectRatio: 1.8, // Ratio ajusté pour éviter les éléments trop larges
                   children: [
                     _buildCategoryCard(context, 'Plages', Icons.beach_access, Colors.blue),
                     _buildCategoryCard(context, 'Montagnes', Icons.terrain, Colors.green),
