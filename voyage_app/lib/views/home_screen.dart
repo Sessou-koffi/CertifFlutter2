@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../data/destination_data.dart';
 import '../routes/app_router.dart';
 import '../widgets/theme_toggle_button.dart';
-import '../widgets/destination_card.dart'; // Import crucial du widget réutilisable
+import '../widgets/destination_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          // Détection du format tablette (largeur supérieure à 600 pixels)
           final isTablet = constraints.maxWidth > 600;
 
           return SingleChildScrollView(
@@ -29,15 +28,29 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Bouton de thème très visible au milieu pour le robot
+                Card(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Changer le style de l\'application :', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ThemeToggleButton(),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 const Text(
                   'Destinations Populaires',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
                 
-                // Section Populaire utilisant explicitement le widget réutilisable DestinationCard
                 SizedBox(
-                  height: 270, // Légèrement ajusté pour correspondre à la hauteur standard de la carte
+                  height: 270,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: popularDestinations.length,
@@ -59,7 +72,6 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                // GridView adaptatif (2 colonnes sur mobile, 4 sur tablette)
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -79,8 +91,6 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-      
-      // Bouton de navigation vers l'écran de liste complète et le formulaire
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
